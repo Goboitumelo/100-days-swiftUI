@@ -168,4 +168,18 @@ print(multiples)
  for loops let us loop over arrays, sets, dictionaries, and ranges. You can assign items to a loop variable and use it inside the loop, or you can use underscore, _, to ignore the loop variable.
  while loops let us craft custom loops that will continue running until a condition becomes false.
  We can skip some or all loop items using continue or break respectively.
+ 
  */
+//Checkpoint 3
+
+for i in 1...100 {
+    if i.isMultiple(of: 3) && i.isMultiple(of: 5){
+        print("FizzBuzz")
+    } else if i.isMultiple(of: 3){
+        print("fizz")
+    } else if i.isMultiple(of: 5){
+        print("buzz")
+    } else {
+        print(i)
+    }
+}
