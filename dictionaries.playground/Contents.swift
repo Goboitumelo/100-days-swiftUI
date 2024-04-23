@@ -183,3 +183,53 @@ for i in 1...100 {
         print(i)
     }
 }
+
+// functions with parameter
+//passing parameters place holder
+func printTimesTables(number: Int, end: Int) {
+    for i in 1...end {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+// we pass urguments actual value
+printTimesTables(number: 5, end: 20)
+
+// function that return something
+
+func rollDice() -> Int {
+    return Int.random(in: 1...6)
+}
+ 
+let results = rollDice()
+print(results)
+
+func matchStrings(stringOne: String, stringTwo: String) -> Bool {
+    return stringOne.sorted() == stringTwo.sorted()
+}
+matchStrings(stringOne: "abc", stringTwo: "abc")
+
+//options tuples to return multiple values from function
+func getUser() -> (firstName: String, lastName: String){
+    (firstName: "Jacob", lastName: "Ngobeni")
+}
+
+//let users = getUser()
+//print("user's name is \(users.firstName) \(users.lastName)")
+// distructuring
+let (firstName, lastName) = getUser()
+print("our user is \(firstName) \(lastName)")
+
+//How to provide default values for parameters
+func printTimesTables(for number: Int, end: Int = 12) {
+    for i in 1...end {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTables(for: 5, end: 20)
+printTimesTables(for: 8)
+//e.g 2
+var characters = ["Lana", "Pam", "Ray", "Sterling"]
+characters.removeAll(keepingCapacity: true)
+characters.removeAll()
+print(characters.count)
