@@ -233,3 +233,114 @@ var characters = ["Lana", "Pam", "Ray", "Sterling"]
 characters.removeAll(keepingCapacity: true)
 characters.removeAll()
 print(characters.count)
+
+enum Password: Error {
+    case short, obviours
+    
+}
+func checkPassword(_ password: String) throws -> String{
+    if password.count < 5 {throw Password.short}
+    if password == "12345" {throw Password.obviours}
+    
+    if password.count < 8 {
+          return "OK"
+      } else if password.count < 10 {
+          return "Good"
+      } else {
+          return "Excellent"
+      }
+}
+
+let string = "12345"
+//
+//do {
+//    let result = try checkPassword(string)
+//    print("Password rating: \(result)")
+//} catch PasswordError.short {
+//    print("Please use a longer password.")
+//} catch PasswordError.obvious {
+//    print("I have the same combination on my luggage!")
+//} catch {
+//    print("There was an error.")
+//}
+
+//How to create and use protocols
+
+protocol Vehicle {
+    var name: String { get }
+    var currentPassengers: Int { get set }
+    func estimateTime(for distance: Int) -> Int
+    func travel(distance: Int)
+}
+
+struct Car: Vehicle {
+    let name = "Car"
+    var currentPassengers = 1
+    func estimateTime(for distance: Int) -> Int {
+        distance / 50
+    }
+
+    func travel(distance: Int) {
+        print("I'm driving \(distance)km.")
+    }
+
+    func openSunroof() {
+        print("It's a nice day!")
+    }
+}
+
+struct Bicycle: Vehicle {
+    let name = "Bicycle"
+    var currentPassengers = 1
+    func estimateTime(for distance: Int) -> Int {
+        distance / 10
+    }
+
+    func travel(distance: Int) {
+        print("I'm cycling \(distance)km.")
+    }
+}
+func commute(distance: Int, using vehicle: Car) {
+    if vehicle.estimateTime(for: distance) > 100 {
+        print("That's too slow! I'll try a different vehicle.")
+    } else {
+        vehicle.travel(distance: distance)
+    }
+}
+
+let car = Car()
+commute(distance: 100, using: car)
+
+func getTravelEstimates(using vehicles: [Vehicle], distance: Int) {
+    for vehicle in vehicles {
+        let estimate = vehicle.estimateTime(for: distance)
+        print("\(vehicle.name): \(estimate) hours to travel \(distance)km")
+    }
+}
+
+let bike = Bicycle()
+//commute(distance: 50, using: Bicycle)
+
+getTravelEstimates(using: [car, bike], distance: 150)
+
+//extentions
+struct Book {
+    let title: String
+    let pageCount: Int
+    let readingHours: Int
+}
+extension Book {
+    init(title: String, pageCount: Int) {
+        self.title = title
+        self.pageCount = pageCount
+        self.readingHours = pageCount / 50
+    }
+}
+    let lotr = Book(title: "Lord of the Rings", pageCount: 1178, readingHours: 24)
+
+/**
+ Protocols are like contracts for code: we specify the functions and methods that we required, and conforming types must implement them.
+ Opaque return types let us hide some information in our code. That might mean we want to retain flexibility to change in the future, but also means we don’t need to write out gigantic return types.
+ Extensions let us add functionality to our own custom types, or to Swift’s built-in types. This might mean adding a method, but we can also add computed properties.
+ Protocol extensions let us add functionality to many types all at once – we can add properties and methods to a protocol, and all conforming types get access to them.
+ */
