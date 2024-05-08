@@ -344,3 +344,31 @@ extension Book {
  Extensions let us add functionality to our own custom types, or to Swift’s built-in types. This might mean adding a method, but we can also add computed properties.
  Protocol extensions let us add functionality to many types all at once – we can add properties and methods to a protocol, and all conforming types get access to them.
  */
+
+
+//How to handle missing data with optionals
+var myVar: Int? = 3
+
+if let unwrapped = myVar {
+    //print("Run if myVar has a value inside")
+}
+
+//guard let number = unwrapped else {
+//    print("Missing input")
+//    return
+//}
+
+// setting defaults
+let names = ["Arya", "Bran", "Robb", "Sansa"]
+
+let chosen = names.randomElement()?.uppercased() ?? "No one"
+print("Next in line: \(chosen)")
+
+struct Book {
+    let title: String
+    let author: String?
+}
+
+var book: Book? = nil
+let author = book?.author?.first?.uppercased() ?? "A"
+print(author)
